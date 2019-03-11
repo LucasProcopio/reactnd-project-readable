@@ -1,14 +1,28 @@
 import { receivePosts } from './posts'
+import { receiveCategories } from './categories'
 import { fetchPosts } from '../utils/post_api'
+import { fetchCategories } from '../utils/category_api'
 import { showLoading, hideLoading } from 'react-redux-loading-bar'
 
-export default function handleInitialData() {
+export function handlePostsData() {
     return (dispatch) => {
         dispatch(showLoading())
         return fetchPosts()
             .then((posts) => {
                 dispatch(receivePosts(posts))
                 dispatch(hideLoading())
+            })
+    }
+}
+
+export function handleCategoryData() {
+    return (dispatch) => {
+        return fetchCategories()
+            .catch((e) => {
+                alert('Error', e)
+            })
+            .then((categories) => {
+                dispatch(receiveCategories(categories))
             })
     }
 }
