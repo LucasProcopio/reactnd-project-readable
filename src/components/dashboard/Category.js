@@ -1,16 +1,20 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { handlePostsByCategory } from '../../actions/shared'
 import { FormControl, InputLabel, Select, MenuItem } from '@material-ui/core';
 
 class Category extends React.Component {
     state = {
-        text: ''
+        category: 'all'
     }
+
     handleChange = e => {
         e.preventDefault()
-        const text = e.target.value
+        const category = e.target.value
         this.setState(() => ({
-            text
+            category
         }))
+        this.props.dispatch(handlePostsByCategory(category))
     }
     render() {
         return (
@@ -21,7 +25,7 @@ class Category extends React.Component {
                         Categories
                     </InputLabel>
                     <Select
-                        value={this.state.text}
+                        value={this.state.category}
                         name="categories"
                         onChange={this.handleChange}
                     >
@@ -37,5 +41,7 @@ class Category extends React.Component {
         )
     }
 }
-
-export default Category
+const mapStateToProps = state => ({
+    categories: Object.keys(state.categories).map(key => state.categories[key]),
+})
+export default connect(mapStateToProps)(Category)

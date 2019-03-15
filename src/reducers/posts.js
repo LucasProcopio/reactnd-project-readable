@@ -1,4 +1,5 @@
-import { RECEIVE_POSTS } from '../actions/posts'
+import { RECEIVE_POSTS, GET_POSTS_BY_CATEGORY } from '../actions/posts'
+
 
 /**
  *  posts reducer
@@ -8,6 +9,12 @@ export default function posts(state = {}, action) {
         case RECEIVE_POSTS:
             return {
                 ...state,
+                ...action.posts
+            }
+        case GET_POSTS_BY_CATEGORY:
+            console.log('CURRENT STATE>>>', { ...state })
+            console.log('ACTION BEIGN PASSED^^^', action)
+            return {
                 ...action.posts
             }
         default:
