@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { handlePostsByCategory } from '../../actions/shared'
 import { FormControl, InputLabel, Select, MenuItem } from '@material-ui/core';
+import { Link } from 'react-router-dom'
 
 class Category extends React.Component {
     state = {
@@ -30,10 +31,14 @@ class Category extends React.Component {
                         onChange={this.handleChange}
                     >
                         <MenuItem value="all">
-                            <em>All</em>
+                            <em>
+                                <Link to="/">All</Link>
+                            </em>
                         </MenuItem>
                         {this.props.categories.map(category => (
-                            <MenuItem key={category.path} value={category.path}>{category.name}</MenuItem>
+                            <MenuItem key={category.path} value={category.path}>
+                                <Link to={category.name}>{category.name}</Link>
+                            </MenuItem>
                         ))}
                     </Select>
                 </FormControl>
