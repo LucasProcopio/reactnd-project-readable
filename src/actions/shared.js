@@ -30,6 +30,14 @@ export function handleCategoryData() {
 export function handlePostsByCategory(category) {
     return dispatch => {
         dispatch(showLoading())
+        console.log(category)
+        if (category === 'all') {
+            return fetchPosts()
+                .then(posts => {
+                    dispatch(receivePosts(posts))
+                    dispatch(hideLoading())
+                })
+        }
         return fetchPostsByCategory(category)
             .then(posts => {
                 dispatch(getPostsByCategory(posts))

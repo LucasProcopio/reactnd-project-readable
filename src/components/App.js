@@ -1,35 +1,30 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import {
-    handlePostsData,
-    handleCategoryData
-} from '../actions/shared'
-import LoadingBar from 'react-redux-loading-bar'
-import Dashboard from './dashboard/Dashboard'
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+import createRootReducer from '../reducers'
+import middleware, { history } from '../middleware'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { ConnectedRouter } from 'connected-react-router'
+import Home from './dashboard/Home'
+import Category from './dashboard/Category'
+
+const store = createStore(createRootReducer(history), middleware)
 
 class App extends React.Component {
-    componentDidMount() {
-        // dispatch the action creator handlePostsData
-        this.props.dispatch(handleCategoryData())
-        this.props.dispatch(handlePostsData())
-
-    }
-
     render() {
         return (
-            <div>
-                <LoadingBar />
-                {this.props.loading === true
-                    ? null
-                    : <Dashboard />
-                }
-            </div>
+            <Provider store={store}>
+                <ConnectedRouter history={history}>
+                    <Router>
+                        <div>
+                            <Route exact path="/" component={Home} />
+                            <Route extact path="/:category" component={Category} />
+                        </div>
+                    </Router>
+                </ConnectedRouter>
+            </Provider>
         )
     }
 }
 
-const mapStateToProps = state => ({
-    loading: Object.keys(state.posts).length === 0,
-})
-
-export default connect(mapStateToProps)(App)
+export default App
