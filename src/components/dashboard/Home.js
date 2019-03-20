@@ -16,9 +16,14 @@ class Home extends React.Component {
             <div className="main-home">
                 <LoadingBar />
                 <NavigationBar />
-                <span>
+                <div>
                     Category > All
-                </span>
+                </div>
+                <div>
+                    <button>
+                        Add  new post
+                    </button>
+                </div>
                 {this.props.loading === true
                     ? null
                     : <div className="posts">

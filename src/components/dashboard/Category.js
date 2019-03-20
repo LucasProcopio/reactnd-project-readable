@@ -16,9 +16,14 @@ class Category extends React.Component {
             <div>
                 <LoadingBar />
                 <NavigationBar />
-                <span>
+                <div>
                     Category > {this.props.match.params.category}
-                </span>
+                </div>
+                <div>
+                    <button>
+                        Add  new post
+                    </button>
+                </div>
                 <Posts posts={
                     this.props.posts.filter((post) => {
                         return post.category === this.props.match.params.category

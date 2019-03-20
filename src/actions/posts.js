@@ -3,6 +3,7 @@
  */
 export const RECEIVE_POSTS = 'RECEIVE_POSTS'
 export const GET_POSTS_BY_CATEGORY = 'GET_POSTS_BY_CATEGORY'
+export const INCREMENT_VOTE_SCORE = 'INCREMENT_VOTE_SCORE'
 
 /**
  * Action creators
@@ -18,5 +19,12 @@ export function getPostsByCategory(posts) {
     return {
         type: GET_POSTS_BY_CATEGORY,
         posts
+    }
+}
+
+export function incrementVoteScore(postID) {
+    return {
+        type: INCREMENT_VOTE_SCORE,
+        postID
     }
 }

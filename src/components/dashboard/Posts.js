@@ -1,4 +1,6 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { incrementVoteScore } from '../../actions/posts'
 import Card from '@material-ui/core/Card'
 import CardHeader from '@material-ui/core/CardHeader'
 import CardContent from '@material-ui/core/CardContent'
@@ -13,6 +15,11 @@ import { formatDate } from '../../utils/helpers'
 import { postCard } from '../../styles/post'
 
 class Posts extends React.Component {
+
+    addVote = (id) => {
+        this.props.dispatch(incrementVoteScore(id))
+    }
+
     render() {
         return (
             <div className="postsContainer">
@@ -34,7 +41,10 @@ class Posts extends React.Component {
                         <CardActions
                             className='postCardAction'
                             disableActionSpacing>
-                            <IconButton aria-label="Add to favorites">
+                            <IconButton
+                                aria-label="Add to favorites"
+                                onClick={() => { this.addVote(post.id) }}
+                            >
                                 <ThumbUp />
                             </IconButton> {post.voteScore}
                             <IconButton aria-label="Share">
@@ -62,4 +72,4 @@ class Posts extends React.Component {
     }
 }
 
-export default Posts
+export default connect()(Posts)

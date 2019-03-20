@@ -1,4 +1,4 @@
-import { RECEIVE_POSTS, GET_POSTS_BY_CATEGORY } from '../actions/posts'
+import { RECEIVE_POSTS, GET_POSTS_BY_CATEGORY, INCREMENT_VOTE_SCORE } from '../actions/posts'
 
 
 /**
@@ -12,10 +12,21 @@ export default function posts(state = {}, action) {
                 ...action.posts
             }
         case GET_POSTS_BY_CATEGORY:
-            console.log('CURRENT STATE>>>', { ...state })
-            console.log('ACTION BEIGN PASSED^^^', action)
             return {
                 ...action.posts
+            }
+        case INCREMENT_VOTE_SCORE:
+            console.log('CURRENT STATE >>>', state)
+            console.log('ACTION <<<<<<', action)
+            return {
+                ...state,
+                [state.posts]: Object.keys(state).map(key => {
+                    if (state[key].id === action.postID) {
+                        state[key].voteScore++
+                    }
+                    return state[key]
+                })
+
             }
         default:
             return state
