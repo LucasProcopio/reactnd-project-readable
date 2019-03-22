@@ -16,18 +16,17 @@ export default function posts(state = {}, action) {
                 ...action.posts
             }
         case INCREMENT_VOTE_SCORE:
-            console.log('CURRENT STATE >>>', state)
-            console.log('ACTION <<<<<<', action)
-            return {
-                ...state,
-                [state.posts]: Object.keys(state).map(key => {
-                    if (state[key].id === action.postID) {
-                        state[key].voteScore++
-                    }
-                    return state[key]
-                })
-
+            // create an action creator to update the score
+            const keys = Object.keys(state)
+            for (let key of keys) {
+                if (state[key].id === action.postID) {
+                    state[key].voteScore++
+                }
             }
+            return {
+                ...state
+            }
+
         default:
             return state
 
