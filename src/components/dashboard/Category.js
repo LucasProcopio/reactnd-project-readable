@@ -1,41 +1,41 @@
 import React from 'react'
-import { FormControl, InputLabel, Select, MenuItem } from '@material-ui/core';
+import NavigationBar from './NavigationBar'
+import { handlePostsData } from '../../actions/shared'
+import { connect } from 'react-redux'
+import Posts from './Posts'
+import LoadingBar from 'react-redux-loading-bar'
+import { Link } from 'react-router-dom'
 
 class Category extends React.Component {
-    state = {
-        text: ''
+
+    componentDidMount() {
+        this.props.dispatch(handlePostsData())
     }
-    handleChange = e => {
-        e.preventDefault()
-        const text = e.target.value
-        this.setState(() => ({
-            text
-        }))
-    }
+
     render() {
         return (
-            <div className="categoryMain">
-                {/* TODO: show posts related to their category */}
-                <FormControl variant="outlined">
-                    <InputLabel htmlFor="outlined-categories">
-                        Categories
-                    </InputLabel>
-                    <Select
-                        value={this.state.text}
-                        name="categories"
-                        onChange={this.handleChange}
-                    >
-                        <MenuItem value="all">
-                            <em>All</em>
-                        </MenuItem>
-                        {this.props.categories.map(category => (
-                            <MenuItem key={category.path} value={category.path}>{category.name}</MenuItem>
-                        ))}
-                    </Select>
-                </FormControl>
+            <div>
+                <LoadingBar />
+                <NavigationBar />
+                <div>
+                    Category > {this.props.match.params.category}
+                </div>
+                <div>
+                    <button>
+                        <Link to="/new">Add new post</Link>
+                    </button>
+                </div>
+                <Posts posts={
+                    this.props.posts.filter((post) => {
+                        return post.category === this.props.match.params.category
+                    })} />
             </div>
         )
     }
 }
 
-export default Category
+const mapStateToProps = state => ({
+    posts: Object.keys(state.posts).map(key => state.posts[key]),
+})
+
+export default connect(mapStateToProps)(Category)

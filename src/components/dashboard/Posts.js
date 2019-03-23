@@ -1,4 +1,10 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { formatDate } from '../../utils/helpers'
+import { postCard } from '../../styles/post'
+import { upVotePostScore, downVotePostScore } from '../../actions/shared';
+
+// material design
 import Card from '@material-ui/core/Card'
 import CardHeader from '@material-ui/core/CardHeader'
 import CardContent from '@material-ui/core/CardContent'
@@ -9,10 +15,17 @@ import ThumbUp from '@material-ui/icons/ThumbUp'
 import ThumbDown from '@material-ui/icons/ThumbDown'
 import Comment from '@material-ui/icons/Comment'
 import Button from '@material-ui/core/Button'
-import { formatDate } from '../../utils/helpers'
-import { postCard } from '../../styles/post'
 
 class Posts extends React.Component {
+
+    upVote = (id) => {
+        this.props.dispatch(upVotePostScore(id))
+    }
+
+    downVote = (id) => {
+        this.props.dispatch(downVotePostScore(id))
+    }
+
     render() {
         return (
             <div className="postsContainer">
@@ -34,10 +47,15 @@ class Posts extends React.Component {
                         <CardActions
                             className='postCardAction'
                             disableActionSpacing>
-                            <IconButton aria-label="Add to favorites">
+                            <IconButton
+                                aria-label="Add to favorites"
+                                onClick={() => this.upVote(post.id)}
+                            >
                                 <ThumbUp />
                             </IconButton> {post.voteScore}
-                            <IconButton aria-label="Share">
+                            <IconButton
+                                aria-label="Share"
+                                onClick={() => this.downVote(post.id)}>
                                 <ThumbDown />
                             </IconButton>
                             <IconButton aria-label="Comments">
@@ -62,4 +80,4 @@ class Posts extends React.Component {
     }
 }
 
-export default Posts
+export default connect()(Posts)
