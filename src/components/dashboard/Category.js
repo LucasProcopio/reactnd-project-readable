@@ -4,6 +4,7 @@ import { handlePostsData } from '../../actions/shared'
 import { connect } from 'react-redux'
 import Posts from './Posts'
 import LoadingBar from 'react-redux-loading-bar'
+import { Link } from 'react-router-dom'
 
 class Category extends React.Component {
 
@@ -21,7 +22,7 @@ class Category extends React.Component {
                 </div>
                 <div>
                     <button>
-                        Add  new post
+                        <Link to="/new">Add new post</Link>
                     </button>
                 </div>
                 <Posts posts={

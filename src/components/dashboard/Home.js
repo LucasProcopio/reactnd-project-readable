@@ -4,6 +4,7 @@ import Posts from './Posts'
 import { handlePostsData } from '../../actions/shared'
 import NavigationBar from './NavigationBar'
 import LoadingBar from 'react-redux-loading-bar'
+import { Link } from 'react-router-dom'
 
 class Home extends React.Component {
 
@@ -13,21 +14,22 @@ class Home extends React.Component {
 
     render() {
         return (
-            <div className="main-home">
+            <div className="main">
                 <LoadingBar />
-                <NavigationBar />
-                <div>
-                    Category > All
-                </div>
-                <div>
-                    <button>
-                        Add  new post
-                    </button>
-                </div>
                 {this.props.loading === true
                     ? null
                     : <div className="posts">
+                        <NavigationBar />
+                        <div>
+                            Category > All
+                        </div>
+                        <div>
+                            <button>
+                                <Link to="/new">Add new post</Link>
+                            </button>
+                        </div>
                         <Posts posts={this.props.posts} />
+
                     </div>}
             </div>
         )

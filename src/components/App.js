@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { ConnectedRouter } from 'connected-react-router'
 import Home from './dashboard/Home'
 import Category from './dashboard/Category'
+import NewPost from './dashboard/NewPost'
 
 const store = createStore(createRootReducer(history), middleware)
 
@@ -19,6 +20,7 @@ class App extends React.Component {
                         <div>
                             <Route exact path="/" component={Home} />
                             <Route extact path="/:category" component={Category} />
+                            <Route path="/new" component={NewPost} />
                         </div>
                     </Router>
                 </ConnectedRouter>

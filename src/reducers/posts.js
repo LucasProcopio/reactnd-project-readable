@@ -1,4 +1,4 @@
-import { RECEIVE_POSTS, GET_POSTS_BY_CATEGORY, INCREMENT_VOTE_SCORE } from '../actions/posts'
+import { RECEIVE_POSTS, GET_POSTS_BY_CATEGORY, INCREMENT_VOTE_SCORE, DECREMENT_VOTE_SCORE } from '../actions/posts'
 
 
 /**
@@ -16,15 +16,24 @@ export default function posts(state = {}, action) {
                 ...action.posts
             }
         case INCREMENT_VOTE_SCORE:
-            // create an action creator to update the score
-            const keys = Object.keys(state)
-            for (let key of keys) {
-                if (state[key].id === action.postID) {
-                    state[key].voteScore++
+            const upVotePosts = Object.keys(state)
+            for (let i of upVotePosts) {
+                if (state[i].id === action.postID) {
+                    state[i].voteScore++
                 }
             }
             return {
-                ...state
+                ...state,
+            }
+        case DECREMENT_VOTE_SCORE:
+            const downVotePosts = Object.keys(state)
+            for (let i of downVotePosts) {
+                if (state[i].id === action.postID) {
+                    state[i].voteScore--
+                }
+            }
+            return {
+                ...state,
             }
 
         default:
