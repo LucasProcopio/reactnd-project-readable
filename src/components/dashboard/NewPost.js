@@ -27,7 +27,11 @@ class NewPost extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault()
-        //todo: submit new post.
+        // todo: post validation.
+        // todo: create an ID and a timecreated for the post
+        // todo: use the UUID (Universal unique identifier ) to generate IDS  https://github.com/kelektiv/node-uuid
+        // todo: dispatch an action creator to add new post
+
         console.log('Author > ', this.state.author, 'title >', this.state.title, 'Body > ', this.state.body, ' Category > ', this.state.category)
     }
 

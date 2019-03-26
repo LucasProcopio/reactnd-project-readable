@@ -1,4 +1,4 @@
-import { RECEIVE_POSTS, GET_POSTS_BY_CATEGORY, INCREMENT_VOTE_SCORE, DECREMENT_VOTE_SCORE } from '../actions/posts'
+import { RECEIVE_POSTS, GET_POSTS_BY_CATEGORY, INCREMENT_VOTE_SCORE, DECREMENT_VOTE_SCORE, ADD_NEW_POST } from '../actions/posts'
 
 
 /**
@@ -35,7 +35,11 @@ export default function posts(state = {}, action) {
             return {
                 ...state,
             }
-
+        case ADD_NEW_POST:
+            return {
+                ...state,
+                ...action.post
+            }
         default:
             return state
 

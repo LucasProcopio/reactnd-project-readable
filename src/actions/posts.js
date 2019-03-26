@@ -5,6 +5,7 @@ export const RECEIVE_POSTS = 'RECEIVE_POSTS'
 export const GET_POSTS_BY_CATEGORY = 'GET_POSTS_BY_CATEGORY'
 export const INCREMENT_VOTE_SCORE = 'INCREMENT_VOTE_SCORE'
 export const DECREMENT_VOTE_SCORE = 'DECREMENT_VOTE_SCORE'
+export const ADD_NEW_POST = 'ADD_NEW_POST'
 
 /**
  * Action creators
@@ -34,5 +35,12 @@ export function decrementVoteScore(postID) {
     return {
         type: DECREMENT_VOTE_SCORE,
         postID
+    }
+}
+
+export function addNewPost(post) {
+    return {
+        type: ADD_NEW_POST,
+        post
     }
 }

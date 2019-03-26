@@ -1,6 +1,6 @@
-import { receivePosts, getPostsByCategory, decrementVoteScore, incrementVoteScore } from './posts'
+import { receivePosts, getPostsByCategory, decrementVoteScore, incrementVoteScore, addNewPost } from './posts'
 import { receiveCategories } from './categories'
-import { fetchPosts, fetchPostsByCategory, vote } from '../utils/post_api'
+import { fetchPosts, fetchPostsByCategory, vote, addPost } from '../utils/post_api'
 import { fetchCategories } from '../utils/category_api'
 import { showLoading, hideLoading } from 'react-redux-loading-bar'
 
@@ -60,6 +60,15 @@ export function downVotePostScore(postID) {
         return vote(postID, 'downVote')
             .then(post => {
                 dispatch(decrementVoteScore(post.id))
+            })
+    }
+}
+
+export function createNewPost(post) {
+    return dispatch => {
+        return addPost(post)
+            .then(post => {
+                dispatch(addNewPost(post))
             })
     }
 }
