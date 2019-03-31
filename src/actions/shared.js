@@ -1,6 +1,6 @@
-import { receivePosts, getPostsByCategory, decrementVoteScore, incrementVoteScore, addNewPost } from './posts'
+import { receivePosts, getPostsByCategory, decrementVoteScore, incrementVoteScore, addNewPost, editPost, getPost } from './posts'
 import { receiveCategories } from './categories'
-import { fetchPosts, fetchPostsByCategory, vote, addPost } from '../utils/post_api'
+import { fetchPosts, fetchPostsByCategory, vote, addPost, fetchPost } from '../utils/post_api'
 import { fetchCategories } from '../utils/category_api'
 import { showLoading, hideLoading } from 'react-redux-loading-bar'
 
@@ -30,7 +30,6 @@ export function handleCategoryData() {
 export function handlePostsByCategory(category) {
     return dispatch => {
         dispatch(showLoading())
-        console.log(category)
         if (category === 'all') {
             return fetchPosts()
                 .then(posts => {
@@ -69,6 +68,24 @@ export function createNewPost(post) {
         return addPost(post)
             .then(post => {
                 dispatch(addNewPost(post))
+            })
+    }
+}
+export function getPostbyID(postID) {
+    return dispatch => {
+        dispatch(showLoading())
+        return fetchPost(postID)
+            .then(post => {
+                dispatch(getPost(post))
+                dispatch(hideLoading())
+            })
+    }
+}
+export function handleEditPost(postID) {
+    return dispatch => {
+        return fetchPost(postID)
+            .then(post => {
+                dispatch(editPost(post))
             })
     }
 }

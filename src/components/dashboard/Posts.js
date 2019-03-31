@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { formatDate } from '../../utils/helpers'
 import { postCard } from '../../styles/post'
 import { upVotePostScore, downVotePostScore } from '../../actions/shared';
+import { Link } from 'react-router-dom'
 
 // material design
 import Card from '@material-ui/core/Card'
@@ -61,12 +62,13 @@ class Posts extends React.Component {
                             <IconButton aria-label="Comments">
                                 <Comment />
                             </IconButton> {post.commentCount}
-                            <Button
-                                variant="outlined"
-                                href="#link"
-                                color="secondary">
-                                Edit
-                            </Button>
+                            <Link to={`/post/${post.id}`}>
+                                <Button
+                                    variant="outlined"
+                                    color="secondary">
+                                    Edit
+                                </Button>
+                            </Link>
                             <Button
                                 variant="outlined"
                                 href="#link">
