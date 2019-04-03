@@ -36,6 +36,7 @@ class EditPost extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault()
+        this.props.dispatch(handleEditPost(this.state))
     }
 
     render() {

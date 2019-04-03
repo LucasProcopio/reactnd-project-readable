@@ -1,4 +1,4 @@
-import { RECEIVE_POSTS, GET_POSTS_BY_CATEGORY, INCREMENT_VOTE_SCORE, DECREMENT_VOTE_SCORE, ADD_NEW_POST, GET_POST } from '../actions/posts'
+import { RECEIVE_POSTS, GET_POSTS_BY_CATEGORY, INCREMENT_VOTE_SCORE, DECREMENT_VOTE_SCORE, ADD_NEW_POST, GET_POST, EDIT_POST } from '../actions/posts'
 
 
 /**
@@ -44,6 +44,13 @@ export default function posts(state = {}, action) {
             return {
                 ...state,
                 ...action.post
+            }
+        case EDIT_POST:
+            Object.keys(state).map(key =>
+                (state[key].id === action.post.id) ? state[key] = action.post : null
+            )
+            return {
+                ...state
             }
         default:
             return state

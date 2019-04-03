@@ -1,6 +1,6 @@
 import { receivePosts, getPostsByCategory, decrementVoteScore, incrementVoteScore, addNewPost, editPost, getPost } from './posts'
 import { receiveCategories } from './categories'
-import { fetchPosts, fetchPostsByCategory, vote, addPost, fetchPost } from '../utils/post_api'
+import { fetchPosts, fetchPostsByCategory, vote, addPost, fetchPost, editPostApi } from '../utils/post_api'
 import { fetchCategories } from '../utils/category_api'
 import { showLoading, hideLoading } from 'react-redux-loading-bar'
 
@@ -81,9 +81,9 @@ export function getPostbyID(postID) {
             })
     }
 }
-export function handleEditPost(postID) {
+export function handleEditPost(post) {
     return dispatch => {
-        return fetchPost(postID)
+        return editPostApi(post, post.id)
             .then(post => {
                 dispatch(editPost(post))
             })

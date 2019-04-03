@@ -18,6 +18,7 @@ import Comment from '@material-ui/icons/Comment'
 import Button from '@material-ui/core/Button'
 
 class Posts extends React.Component {
+    // todo: handle post more button, to get more information about the post.
 
     upVote = (id) => {
         this.props.dispatch(upVotePostScore(id))

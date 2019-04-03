@@ -35,7 +35,7 @@ class NewPost extends React.Component {
             timestamp: Date.now(),
             title: this.state.title,
             body: this.state.body,
-            owner: this.state.author,
+            author: this.state.author,
             category: this.state.category
         }
 
