@@ -1,5 +1,5 @@
 ## React Discussion board
-* This project is currently under development, soon it will be updated with installations instructions. 
+* This project is currently under development, soon it will be updated with installation instructions. 
 
 React Discussion Board is a discussion forum web app, for Udacity’s React Nanodegree second project "Readable".
 Users are able to post content to predefined categories, edit, delete, comment on their posts and other users' posts
