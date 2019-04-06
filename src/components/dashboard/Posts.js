@@ -70,11 +70,11 @@ class Posts extends React.Component {
                                     Edit
                                 </Button>
                             </Link>
-                            <Button
-                                variant="outlined"
-                                href="#link">
-                                more
-                            </Button>
+                            <Link to={`${post.category}/${post.id}`}>
+                                <Button variant="outlined">
+                                    more
+                                </Button>
+                            </Link>
                         </CardActions>
                     </Card>
                 ))}
