@@ -8,6 +8,8 @@ import { ConnectedRouter } from 'connected-react-router'
 import Home from './dashboard/Home'
 import Category from './dashboard/Category'
 import NewPost from './dashboard/NewPost'
+import EditPost from './dashboard/EditPost'
+import PostDetail from './dashboard/PostDetail'
 
 const store = createStore(createRootReducer(history), middleware)
 
@@ -19,8 +21,10 @@ class App extends React.Component {
                     <Router>
                         <div>
                             <Route exact path="/" component={Home} />
-                            <Route extact path="/:category" component={Category} />
+                            <Route exact path="/:category" component={Category} />
                             <Route path="/new" component={NewPost} />
+                            <Route exact path="/post/:post_id" component={EditPost} />
+                            <Route excat path="/:category/:post_id" component={PostDetail} />
                         </div>
                     </Router>
                 </ConnectedRouter>

@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { formatDate } from '../../utils/helpers'
 import { postCard } from '../../styles/post'
 import { upVotePostScore, downVotePostScore } from '../../actions/shared';
+import { Link } from 'react-router-dom'
 
 // material design
 import Card from '@material-ui/core/Card'
@@ -17,6 +18,7 @@ import Comment from '@material-ui/icons/Comment'
 import Button from '@material-ui/core/Button'
 
 class Posts extends React.Component {
+    // todo: handle post more button, to get more information about the post.
 
     upVote = (id) => {
         this.props.dispatch(upVotePostScore(id))
@@ -61,17 +63,18 @@ class Posts extends React.Component {
                             <IconButton aria-label="Comments">
                                 <Comment />
                             </IconButton> {post.commentCount}
-                            <Button
-                                variant="outlined"
-                                href="#link"
-                                color="secondary">
-                                Edit
-                            </Button>
-                            <Button
-                                variant="outlined"
-                                href="#link">
-                                more
-                            </Button>
+                            <Link to={`/post/${post.id}`}>
+                                <Button
+                                    variant="outlined"
+                                    color="secondary">
+                                    Edit
+                                </Button>
+                            </Link>
+                            <Link to={`${post.category}/${post.id}`}>
+                                <Button variant="outlined">
+                                    more
+                                </Button>
+                            </Link>
                         </CardActions>
                     </Card>
                 ))}

@@ -15,7 +15,7 @@ class NavigationBar extends React.Component {
                 <ul>
                     <li key="all"><Link to="/">All</Link></li>
                     {this.props.categories.map(category => (
-                        <li key={category.path}> <Link to={category.path}>{category.name}</Link></li>
+                        <li key={category.path}> <Link to={`/${category.path}`}>{category.name}</Link></li>
                     ))}
                 </ul>
             </div>

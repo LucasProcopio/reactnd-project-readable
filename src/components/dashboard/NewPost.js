@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { handleCategoryData } from '../../actions/shared'
+import { handleCategoryData, createNewPost } from '../../actions/shared'
+import PostForm from './PostForm'
 
 class NewPost extends React.Component {
 
@@ -27,62 +28,28 @@ class NewPost extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault()
-        //todo: submit new post.
-        console.log('Author > ', this.state.author, 'title >', this.state.title, 'Body > ', this.state.body, ' Category > ', this.state.category)
+        // todo: post validation.
+        // todo: display character count validation
+        const post = {
+            id: Math.random().toString(36).substr(2, 9),
+            timestamp: Date.now(),
+            title: this.state.title,
+            body: this.state.body,
+            author: this.state.author,
+            category: this.state.category
+        }
+
+        this.props.dispatch(createNewPost(post))
     }
 
     render() {
         return (
             <div>
-                <form onSubmit={this.handleSubmit}>
-                    <label>
-                        Category:
-                        <select
-                            name="category"
-                            onChange={this.handleChange}
-                            value={this.state.category}
-                        >
-                            {this.props.categories.map(category => (
-                                <option
-                                    key={category.path}
-                                    value={category.name}
-                                >
-                                    {category.name}
-                                </option>
-                            ))}
-                        </select>
-                    </label>
-                    <label>
-                        Author:
-                        <input
-                            name="author"
-                            type="text"
-                            placeholder="Author"
-                            value={this.state.author}
-                            onChange={this.handleChange}
-                        />
-                    </label>
-                    <label>
-                        Title:
-                        <input
-                            name="title"
-                            type="text"
-                            placeholder="Title"
-                            value={this.state.title}
-                            onChange={this.handleChange}
-                        />
-                    </label>
-                    <label>
-                        Body:
-                        <textarea
-                            name="body"
-                            value={this.state.body}
-                            placeholder="Body of the post"
-                            onChange={this.handleChange}>
-                        </textarea>
-                    </label>
-                    <input type="submit" value="Submit" />
-                </form>
+                <PostForm
+                    handleChange={this.handleChange}
+                    handleSubmit={this.handleSubmit}
+                    post={this.state}
+                    categories={this.props.categories} />
             </div>
         )
     }

@@ -1,6 +1,6 @@
-import { receivePosts, getPostsByCategory, decrementVoteScore, incrementVoteScore } from './posts'
+import { receivePosts, getPostsByCategory, decrementVoteScore, incrementVoteScore, addNewPost, editPost, getPost } from './posts'
 import { receiveCategories } from './categories'
-import { fetchPosts, fetchPostsByCategory, vote } from '../utils/post_api'
+import { fetchPosts, fetchPostsByCategory, vote, addPost, fetchPost, editPostApi } from '../utils/post_api'
 import { fetchCategories } from '../utils/category_api'
 import { showLoading, hideLoading } from 'react-redux-loading-bar'
 
@@ -30,7 +30,6 @@ export function handleCategoryData() {
 export function handlePostsByCategory(category) {
     return dispatch => {
         dispatch(showLoading())
-        console.log(category)
         if (category === 'all') {
             return fetchPosts()
                 .then(posts => {
@@ -60,6 +59,33 @@ export function downVotePostScore(postID) {
         return vote(postID, 'downVote')
             .then(post => {
                 dispatch(decrementVoteScore(post.id))
+            })
+    }
+}
+
+export function createNewPost(post) {
+    return dispatch => {
+        return addPost(post)
+            .then(post => {
+                dispatch(addNewPost(post))
+            })
+    }
+}
+export function getPostbyID(postID) {
+    return dispatch => {
+        dispatch(showLoading())
+        return fetchPost(postID)
+            .then(post => {
+                dispatch(getPost(post))
+                dispatch(hideLoading())
+            })
+    }
+}
+export function handleEditPost(post) {
+    return dispatch => {
+        return editPostApi(post, post.id)
+            .then(post => {
+                dispatch(editPost(post))
             })
     }
 }
