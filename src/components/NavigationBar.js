@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { handleCategoryData } from '../../actions/shared'
+import { handleCategoryData } from '../actions/shared'
 import { Link } from 'react-router-dom'
 
 class NavigationBar extends React.Component {

@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { handleCategoryData, createNewPost } from '../../actions/shared'
+import { handleCategoryData, createNewPost } from '../actions/shared'
 import PostForm from './PostForm'
 
 class NewPost extends React.Component {
