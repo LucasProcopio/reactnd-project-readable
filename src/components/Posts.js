@@ -1,8 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { formatDate } from '../../utils/helpers'
-import { postCard } from '../../styles/post'
-import { upVotePostScore, downVotePostScore } from '../../actions/shared';
+import { formatDate } from '../utils/helpers'
+import { postCard } from '../styles/post'
+import { upVotePostScore, downVotePostScore } from '../actions/shared';
 import { Link } from 'react-router-dom'
 
 // material design
@@ -18,7 +18,6 @@ import Comment from '@material-ui/icons/Comment'
 import Button from '@material-ui/core/Button'
 
 class Posts extends React.Component {
-    // todo: handle post more button, to get more information about the post.
 
     upVote = (id) => {
         this.props.dispatch(upVotePostScore(id))
@@ -39,8 +38,12 @@ class Posts extends React.Component {
                         </CardHeader>
                         <CardContent>
                             <div className="postInfo">
-                                <span className="postAuthor">{post.author}</span>
-                                <span className="postCategory">--{post.category}--</span>
+                                <span className="postAuthor">
+                                    {post.author}
+                                </span>
+                                <span className="postCategory">
+                                    --{post.category}--
+                                </span>
                             </div>
                             <Typography component="p">
                                 {post.body}
@@ -70,11 +73,18 @@ class Posts extends React.Component {
                                     Edit
                                 </Button>
                             </Link>
-                            <Link to={`${post.category}/${post.id}`}>
+                            {(this.props.deleteBtn === true)
+                                ?
                                 <Button variant="outlined">
-                                    more
-                                </Button>
-                            </Link>
+                                    Delete
+                                    </Button>
+
+                                : <Link to={`${post.category}/${post.id}`}>
+                                    <Button variant="outlined">
+                                        more
+                                        </Button>
+                                </Link>
+                            }
                         </CardActions>
                     </Card>
                 ))}

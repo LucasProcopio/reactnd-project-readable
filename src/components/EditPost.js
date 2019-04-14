@@ -1,6 +1,6 @@
 import React from 'react'
 import NavigationBar from './NavigationBar'
-import { handleEditPost } from '../../actions/shared'
+import { handleEditPost } from '../actions/shared'
 import { connect } from 'react-redux'
 import PostForm from './PostForm'
 

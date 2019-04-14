@@ -3,13 +3,14 @@ import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import createRootReducer from '../reducers'
 import middleware, { history } from '../middleware'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { ConnectedRouter } from 'connected-react-router'
-import Home from './dashboard/Home'
-import Category from './dashboard/Category'
-import NewPost from './dashboard/NewPost'
-import EditPost from './dashboard/EditPost'
-import PostDetail from './dashboard/PostDetail'
+import Home from './Home'
+import Category from './Category'
+import NewPost from './NewPost'
+import EditPost from './EditPost'
+import PostDetail from './PostDetail'
+import EditComment from './EditComment';
 
 const store = createStore(createRootReducer(history), middleware)
 
@@ -19,13 +20,25 @@ class App extends React.Component {
             <Provider store={store}>
                 <ConnectedRouter history={history}>
                     <Router>
-                        <div>
+                        <Switch>
                             <Route exact path="/" component={Home} />
-                            <Route exact path="/:category" component={Category} />
-                            <Route path="/new" component={NewPost} />
-                            <Route exact path="/post/:post_id" component={EditPost} />
-                            <Route excat path="/:category/:post_id" component={PostDetail} />
-                        </div>
+                            <Route
+                                exact path="/:category"
+                                component={Category}
+                            />
+                            <Route exact path="/new" component={NewPost} />
+                            <Route
+                                exact path="/post/:post_id"
+                                component={EditPost}
+                            />
+                            <Route
+                                exact path="/comment/:comment_id"
+                                component={EditComment} />
+                            <Route
+                                exact path="/:category/:post_id"
+                                component={PostDetail}
+                            />
+                        </Switch>
                     </Router>
                 </ConnectedRouter>
             </Provider>

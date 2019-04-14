@@ -1,6 +1,31 @@
-import { receivePosts, getPostsByCategory, decrementVoteScore, incrementVoteScore, addNewPost, editPost, getPost } from './posts'
+import {
+    receivePosts,
+    getPostsByCategory,
+    decrementVoteScore,
+    incrementVoteScore,
+    addNewPost,
+    editPost,
+    getPost
+} from './posts'
+
+import {
+    fetchPosts,
+    fetchPostsByCategory,
+    vote,
+    addPost,
+    fetchPost,
+    editPostApi
+} from '../utils/post_api'
+
+import {
+    fetchComments,
+    incrementCommentScore,
+    decrementCommentScore ,
+    editCommentBody
+} from './comments'
+
+import { getComments, voteComment, editComment } from '../utils/comment_api'
 import { receiveCategories } from './categories'
-import { fetchPosts, fetchPostsByCategory, vote, addPost, fetchPost, editPostApi } from '../utils/post_api'
 import { fetchCategories } from '../utils/category_api'
 import { showLoading, hideLoading } from 'react-redux-loading-bar'
 
@@ -71,10 +96,10 @@ export function createNewPost(post) {
             })
     }
 }
-export function getPostbyID(postID) {
+export function getPostbyId(postId) {
     return dispatch => {
         dispatch(showLoading())
-        return fetchPost(postID)
+        return fetchPost(postId)
             .then(post => {
                 dispatch(getPost(post))
                 dispatch(hideLoading())
@@ -86,6 +111,44 @@ export function handleEditPost(post) {
         return editPostApi(post, post.id)
             .then(post => {
                 dispatch(editPost(post))
+            })
+    }
+}
+
+export function getPostComments(postId) {
+    return dispatch => {
+        dispatch(showLoading())
+        return getComments(postId)
+            .then(comments => {
+                dispatch(fetchComments(comments))
+                dispatch(hideLoading())
+            })
+    }
+}
+
+export function upVoteCommentScore(commentId) {
+    return dispatch => {
+        return voteComment(commentId, "upVote")
+            .then(comment => {
+                dispatch(incrementCommentScore(comment.id))
+            })
+    }
+}
+
+export function downVoteCommentScore(commentId) {
+    return dispatch => {
+        return voteComment(commentId, "downVote")
+            .then(comment => {
+                dispatch(decrementCommentScore(comment.id))
+            })
+    }
+}
+
+export function handleEditComment(comment){
+    return dispatch => {
+        return editComment(comment, comment.id)
+            .then(comment => {
+                dispatch(editCommentBody(comment))
             })
     }
 }

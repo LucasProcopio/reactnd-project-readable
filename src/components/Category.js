@@ -1,6 +1,6 @@
 import React from 'react'
 import NavigationBar from './NavigationBar'
-import { handlePostsData } from '../../actions/shared'
+import { handlePostsData } from '../actions/shared'
 import { connect } from 'react-redux'
 import Posts from './Posts'
 import LoadingBar from 'react-redux-loading-bar'

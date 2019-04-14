@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Posts from './Posts'
-import { handlePostsData } from '../../actions/shared'
+import { handlePostsData } from '../actions/shared'
 import NavigationBar from './NavigationBar'
 import LoadingBar from 'react-redux-loading-bar'
 import { Link } from 'react-router-dom'
