@@ -7,14 +7,41 @@ import Comments from './Comments'
 
 import { getPostbyId } from '../actions/shared'
 import { getPostComments } from '../actions/shared';
+import { NewCommentForm } from './CommentForm';
 
 class PostDetail extends React.Component {
+
+    constructor(props) {
+        super(props)
+        this.state = {
+            id: '',
+            parentId: props.match.params.post_id,
+            author: '',
+            body: '',
+            deleted: false,
+            parentDeleted: false,
+            timestamp: 0,
+            voteScore: 0
+        }
+
+        this.handleChange = this.handleChange.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
+    }
 
     componentDidMount() {
         const postId = this.props.match.params.post_id
         this.props.dispatch(getPostbyId(postId))
         this.props.dispatch(getPostComments(postId))
 
+    }
+
+    handleChange(event) {
+        this.setState({ [event.target.name]: event.target.value })
+    }
+
+    handleSubmit(event) {
+        event.preventDefault()
+        // dispatch post creation
     }
 
     render() {
@@ -31,7 +58,12 @@ class PostDetail extends React.Component {
                 <p>** Post Details **</p>
                 <p>Category: {this.props.match.params.category}</p>
                 <Posts posts={this.props.post} deleteBtn={true} />
-                <button>Add a comment</button>
+                <p>** Add a comment **</p>
+                <NewCommentForm
+                    handleChange={this.handleChange}
+                    handleSubmit={this.handleSubmit}
+                    comment={this.state}
+                />
                 <hr />
                 <Comments comments={this.props.comments} />
             </div>
