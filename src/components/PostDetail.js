@@ -5,8 +5,12 @@ import NavigationBar from './NavigationBar'
 import Posts from './Posts'
 import Comments from './Comments'
 
-import { getPostbyId } from '../actions/shared'
-import { getPostComments } from '../actions/shared';
+import {
+    getPostComments,
+    getPostbyId,
+    handleNewComment
+} from '../actions/shared';
+
 import { NewCommentForm } from './CommentForm';
 
 class PostDetail extends React.Component {
@@ -18,10 +22,7 @@ class PostDetail extends React.Component {
             parentId: props.match.params.post_id,
             author: '',
             body: '',
-            deleted: false,
-            parentDeleted: false,
             timestamp: 0,
-            voteScore: 0
         }
 
         this.handleChange = this.handleChange.bind(this)
@@ -41,7 +42,12 @@ class PostDetail extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault()
-        // dispatch post creation
+        this.setState((prevState, currState) => {
+
+        })
+
+        this.props.dispatch(handleNewComment(this.state))
+        console.log(this.state)
     }
 
     render() {

@@ -3,6 +3,7 @@ import {
     INCREMENT_COMMENT_SCORE,
     DECREMENT_COMMENT_SCORE,
     EDIT_COMMENT_BODY,
+    ADD_NEW_COMMENT
 } from '../actions/comments'
 
 export default function comments(state = {}, action) {
@@ -31,11 +32,17 @@ export default function comments(state = {}, action) {
             return {
                 ...state
             }
+        case ADD_NEW_COMMENT:
+            const newComment = Object.assign(state, [...action.comment])
+            console.log('>>>>>NEW', newComment)
+            return {
+                newComment
+            }
         case EDIT_COMMENT_BODY:
             Object.keys(state).map(key =>
                 (state[key].id === action.comment.id)
-                ? state[key] = action.comment
-                : null
+                    ? state[key] = action.comment
+                    : null
             )
             return {
                 ...state
