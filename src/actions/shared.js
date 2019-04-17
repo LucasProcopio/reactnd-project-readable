@@ -20,11 +20,18 @@ import {
 import {
     fetchComments,
     incrementCommentScore,
-    decrementCommentScore ,
-    editCommentBody
+    decrementCommentScore,
+    editCommentBody,
+    addNewComment
 } from './comments'
 
-import { getComments, voteComment, editComment } from '../utils/comment_api'
+import {
+    getComments,
+    voteComment,
+    editComment,
+    addComment
+} from '../utils/comment_api'
+
 import { receiveCategories } from './categories'
 import { fetchCategories } from '../utils/category_api'
 import { showLoading, hideLoading } from 'react-redux-loading-bar'
@@ -144,11 +151,22 @@ export function downVoteCommentScore(commentId) {
     }
 }
 
-export function handleEditComment(comment){
+export function handleEditComment(comment) {
     return dispatch => {
         return editComment(comment, comment.id)
             .then(comment => {
                 dispatch(editCommentBody(comment))
+            })
+    }
+}
+
+export function handleNewComment(comment) {
+    return dispatch => {
+        dispatch(showLoading())
+        return addComment(comment)
+            .then(comment => {
+                dispatch(addNewComment(comment))
+                dispatch(hideLoading())
             })
     }
 }

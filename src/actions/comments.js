@@ -5,6 +5,7 @@ export const FETCH_COMMENTS = 'FETCH_COMMENTS'
 export const INCREMENT_COMMENT_SCORE = 'INCREMENT_COMMENT_SCORE'
 export const DECREMENT_COMMENT_SCORE = 'DECREMENT_COMMENT_SCORE'
 export const EDIT_COMMENT_BODY = 'EDIT_COMMENT_BODY'
+export const ADD_NEW_COMMENT = 'ADD_NEW_COMMENT'
 
 /**
  * Action creators
@@ -30,9 +31,16 @@ export function decrementCommentScore(commentId) {
     }
 }
 
-export function editCommentBody(comment){
+export function editCommentBody(comment) {
     return {
         type: EDIT_COMMENT_BODY,
+        comment
+    }
+}
+
+export function addNewComment(comment) {
+    return {
+        type: ADD_NEW_COMMENT,
         comment
     }
 }
