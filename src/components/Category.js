@@ -18,7 +18,7 @@ class Category extends React.Component {
         <NavigationBar />
         <div>Category > {this.props.match.params.category}</div>
         <div>
-          <Link className="new-post-btn" to="/new">
+          <Link className="new-post-btn" to="/new/post">
             Add new post
           </Link>
         </div>

@@ -6,6 +6,7 @@ export const INCREMENT_COMMENT_SCORE = "INCREMENT_COMMENT_SCORE";
 export const DECREMENT_COMMENT_SCORE = "DECREMENT_COMMENT_SCORE";
 export const EDIT_COMMENT_BODY = "EDIT_COMMENT_BODY";
 export const ADD_NEW_COMMENT = "ADD_NEW_COMMENT";
+export const DELETE_COMMENT = "DELETE_COMMENT";
 
 /**
  * Action creators
@@ -42,5 +43,12 @@ export function addNewComment(comment) {
   return {
     type: ADD_NEW_COMMENT,
     comment
+  };
+}
+
+export function deletePostComment(commentId) {
+  return {
+    type: DELETE_COMMENT,
+    commentId
   };
 }

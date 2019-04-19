@@ -22,14 +22,16 @@ import {
   incrementCommentScore,
   decrementCommentScore,
   editCommentBody,
-  addNewComment
+  addNewComment,
+  deletePostComment
 } from "./comments";
 
 import {
   getComments,
   voteComment,
   editComment,
-  addComment
+  addComment,
+  deleteComment
 } from "../utils/comment_api";
 
 import { receiveCategories } from "./categories";
@@ -154,6 +156,14 @@ export function handleNewComment(comment) {
     return addComment(comment).then(comment => {
       dispatch(addNewComment(comment));
       dispatch(hideLoading());
+    });
+  };
+}
+
+export function handleDeleteComment(commentId) {
+  return dispatch => {
+    return deleteComment(commentId).then(comment => {
+      dispatch(deletePostComment(comment.id));
     });
   };
 }

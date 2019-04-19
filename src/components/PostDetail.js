@@ -73,7 +73,10 @@ class PostDetail extends React.Component {
           comment={this.state}
         />
         <hr />
-        <Comments comments={this.props.comments} />
+        <Comments
+          comments={this.props.comments}
+          getPost={id => this.props.getPost(id)}
+        />
       </div>
     );
   }
