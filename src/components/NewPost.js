@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { handleCategoryData, createNewPost } from "../actions/shared";
 import PostForm from "./PostForm";
+import NavigationBar from "./NavigationBar";
 
 class NewPost extends React.Component {
   constructor(props) {
@@ -44,8 +45,10 @@ class NewPost extends React.Component {
   }
 
   render() {
+    console.log("lucas");
     return (
       <div>
+        <NavigationBar />
         <PostForm
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}

@@ -30,8 +30,8 @@ class PostDetail extends React.Component {
 
   componentDidMount() {
     const postId = this.props.match.params.post_id;
-    this.props.dispatch(getPostbyId(postId));
-    this.props.dispatch(getPostComments(postId));
+    this.props.getPost(postId);
+    this.props.getComments(postId);
   }
 
   handleChange(event) {
@@ -45,12 +45,13 @@ class PostDetail extends React.Component {
         .toString(36)
         .substr(2, 10),
       timestamp: Date.now(),
+      body: this.state.body,
       author: this.state.author,
-      body: this.state.body
+      parentId: this.state.parentId
     };
 
-    this.props.dispatch(handleNewComment(comment));
-    console.log(comment);
+    this.props.newComment(comment);
+    this.props.getPost(comment.parentId);
   }
 
   render() {
@@ -60,6 +61,7 @@ class PostDetail extends React.Component {
 
     return (
       <div>
+        <LoadingBar />
         <NavigationBar />
         <p>** Post Details **</p>
         <p>Category: {this.props.match.params.category}</p>
@@ -83,4 +85,13 @@ const mapStateToProps = state => ({
   loading: Object.keys(state.posts).length === 0
 });
 
-export default connect(mapStateToProps)(PostDetail);
+const mapDispatchToProps = dispatch => ({
+  newComment: comment => dispatch(handleNewComment(comment)),
+  getPost: postId => dispatch(getPostbyId(postId)),
+  getComments: postId => dispatch(getPostComments(postId))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PostDetail);
