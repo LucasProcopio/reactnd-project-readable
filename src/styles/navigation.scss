@@ -1,0 +1,22 @@
+.category-navigation {
+  display: flex;
+  height: 60px;
+  border-bottom: 1px solid #eee;
+  background-color: #fff;
+}
+
+.list-wrapper {
+  display: flex;
+  line-height: 60px;
+  width: 70%;
+  margin: auto;
+  li {
+    flex-direction: row;
+    margin: 0px 10px;
+  }
+  .category-link {
+    color: #777;
+    font-size: 16px;
+    text-decoration: none;
+  }
+}

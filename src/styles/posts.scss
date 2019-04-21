@@ -1,0 +1,82 @@
+.post-container {
+  width: 70%;
+  margin: auto;
+  .post-wrapper {
+    background: #fff;
+    border: 1px solid #ccc;
+    width: 90%;
+    border-radius: 4px;
+    width: 90%;
+    margin: 20px auto;
+    .post-category {
+      font-size: 12px;
+      font-weight: bold;
+      margin: 5px 10px;
+      color: #333;
+    }
+    .post-author,
+    .post-date {
+      color: #777;
+      font-size: 12px;
+      margin: 5px 10px;
+    }
+  }
+  .post-body {
+    .post-title {
+      color: #555;
+      font-size: 16px;
+      margin: 10px;
+      display: block;
+    }
+    .post-body-content {
+      color: #333;
+      font-size: 14px;
+      margin: 20px 10px;
+    }
+  }
+
+  .post-footer-wrapper {
+    display: flex;
+    justify-content: space-between;
+    .post-score-count {
+      display: flex;
+      margin: 10px;
+      .vote-score-btn {
+        margin: 0 5px;
+        cursor: pointer;
+        color: #555;
+      }
+      .comment-score-icon {
+        margin: 0 20px;
+        color: #555;
+      }
+      .vote-score {
+        font-size: 12px;
+        color: #555;
+        font-weight: bold;
+        margin: 0px 10px;
+      }
+      .post-comment-count {
+        font-size: 12px;
+        color: #555;
+        font-weight: bold;
+      }
+    }
+    .post-actions {
+      display: flex;
+      .edit-post-btn {
+        color: #555;
+        margin: 10px;
+      }
+      .delete-post-btn {
+        color: #555;
+        margin: 10px;
+        cursor: pointer;
+      }
+      .know-more-btn {
+        color: #555;
+        margin: 10px;
+      }
+    }
+  }
+}

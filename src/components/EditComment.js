@@ -42,7 +42,6 @@ class EditComment extends React.Component {
     return (
       <div>
         <NavigationBar />
-        <p>** Edit Comment **</p>
         <CommentForm
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}

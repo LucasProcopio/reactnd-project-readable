@@ -45,7 +45,6 @@ class NewPost extends React.Component {
   }
 
   render() {
-    console.log("lucas");
     return (
       <div>
         <NavigationBar />

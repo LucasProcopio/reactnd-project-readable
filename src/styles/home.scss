@@ -1,0 +1,50 @@
+.main {
+  width: 100%;
+  height: 100%;
+}
+.top {
+  display: flex;
+  justify-content: space-around;
+  height: 50px;
+  line-height: 50px;
+}
+.new-post-btn {
+  text-decoration: none;
+  color: #0079d3;
+  font-size: 12px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+.sort {
+  background-color: #fff;
+}
+.sort-wrapper {
+  display: flex;
+  height: 40px;
+  border-bottom: #1479d5 3px solid;
+  width: 70%;
+  margin: auto;
+  .sort-title {
+    text-transform: uppercase;
+    color: #555;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 40px;
+    margin-left: 10px;
+  }
+  .date-sort,
+  .hot-sort {
+    color: #0079d3;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 40px;
+    margin: 0 10px;
+    cursor: pointer;
+  }
+}
+.category-name {
+  color: #777;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 14px;
+}

@@ -69,10 +69,7 @@ class PostDetail extends React.Component {
       <div>
         <LoadingBar />
         <NavigationBar />
-        <p>** Post Details **</p>
-        <p>Category: {this.props.match.params.category}</p>
         <ListPosts posts={this.props.post} deleteBtn={true} />
-        <p>** Add a comment **</p>
         <NewCommentForm
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}

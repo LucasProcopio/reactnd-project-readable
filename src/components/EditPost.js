@@ -42,7 +42,6 @@ class EditPost extends React.Component {
     return (
       <div>
         <NavigationBar />
-        <p>**Edit post**</p>
         <PostForm
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
