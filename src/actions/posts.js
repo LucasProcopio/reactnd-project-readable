@@ -9,6 +9,8 @@ export const ADD_NEW_POST = "ADD_NEW_POST";
 export const GET_POST = "GET_POST";
 export const EDIT_POST = "EDIT_POST";
 export const DELETE_POST = "DELETE_POST";
+export const SORT_BY_DATE = "SORT_BY_DATE";
+export const SORT_BY_SCORE = "SORT_BY_SCORE";
 
 /**
  * Action creators
@@ -66,5 +68,19 @@ export function delPost(post) {
   return {
     type: DELETE_POST,
     post
+  };
+}
+
+export function sortByDate(posts) {
+  return {
+    type: SORT_BY_DATE,
+    posts
+  };
+}
+
+export function sortByScore(posts) {
+  return {
+    type: SORT_BY_SCORE,
+    posts
   };
 }

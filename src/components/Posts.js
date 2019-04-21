@@ -20,6 +20,7 @@ import ThumbUp from "@material-ui/icons/ThumbUp";
 import ThumbDown from "@material-ui/icons/ThumbDown";
 import Comment from "@material-ui/icons/Comment";
 import Button from "@material-ui/core/Button";
+import { confirmAlert } from "react-confirm-alert";
 
 class Posts extends React.Component {
   state = {
@@ -45,10 +46,28 @@ class Posts extends React.Component {
     });
   };
 
+  //redirects the user if the post is deleted
   renderRedirect = () => {
     if (this.state.redirect === true) {
       return <Redirect to="/" />;
     }
+  };
+
+  handleDeletePost = postId => {
+    confirmAlert({
+      title: "Confirm Delete",
+      message: "Are you sure you want to delete ?",
+      buttons: [
+        {
+          label: "Delete",
+          onClick: () => this.deletePost(postId)
+        },
+        {
+          label: "Keep",
+          onClick: () => null
+        }
+      ]
+    });
   };
 
   render() {
@@ -93,7 +112,7 @@ class Posts extends React.Component {
               </Link>
               {this.props.deleteBtn === true ? (
                 <Button
-                  onClick={() => this.deletePost(post.id)}
+                  onClick={() => this.handleDeletePost(post.id)}
                   variant="outlined"
                 >
                   Delete

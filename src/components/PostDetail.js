@@ -69,7 +69,6 @@ class PostDetail extends React.Component {
       <div>
         <LoadingBar />
         <NavigationBar />
-        {console.log(this.props.post)}
         <p>** Post Details **</p>
         <p>Category: {this.props.match.params.category}</p>
         <ListPosts posts={this.props.post} deleteBtn={true} />
