@@ -1,10 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
-import Posts from "./Posts";
 import { handlePostsData } from "../actions/shared";
 import NavigationBar from "./NavigationBar";
 import LoadingBar from "react-redux-loading-bar";
 import { Link } from "react-router-dom";
+import ListPosts from "./ListPosts";
 
 class Home extends React.Component {
   componentDidMount() {
@@ -15,25 +15,22 @@ class Home extends React.Component {
     return (
       <div className="main">
         <LoadingBar />
-        {this.props.loading === true ? null : (
-          <div className="posts">
-            <NavigationBar />
-            <div>Category > All</div>
-            <div>
-              <Link className="new-post-btn" to="/new/post">
-                Add new post
-              </Link>
-            </div>
-            <Posts posts={this.props.posts} />
+        <NavigationBar />
+        <div className="posts">
+          <div>Category > All</div>
+          <div>
+            <Link className="new-post-btn" to="/new/post">
+              Add new post
+            </Link>
           </div>
-        )}
+        </div>
+        <ListPosts posts={this.props.posts} />
       </div>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  loading: Object.keys(state.posts).length === 0,
   posts: Object.keys(state.posts).map(key => state.posts[key])
 });
 

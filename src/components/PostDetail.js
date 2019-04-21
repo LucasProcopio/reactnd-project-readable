@@ -2,8 +2,8 @@ import React from "react";
 import { connect } from "react-redux";
 import LoadingBar from "react-redux-loading-bar";
 import NavigationBar from "./NavigationBar";
-import Posts from "./Posts";
 import Comments from "./Comments";
+import NotFound from "./NotFound";
 
 import {
   getPostComments,
@@ -12,6 +12,7 @@ import {
 } from "../actions/shared";
 
 import { NewCommentForm } from "./CommentForm";
+import ListPosts from "./ListPosts";
 
 class PostDetail extends React.Component {
   constructor(props) {
@@ -55,17 +56,23 @@ class PostDetail extends React.Component {
   }
 
   render() {
-    if (this.props.loading === true) {
-      return <LoadingBar />;
+    if (this.props.post.length === 0) {
+      return (
+        <div>
+          <NavigationBar />
+          <NotFound />
+        </div>
+      );
     }
 
     return (
       <div>
         <LoadingBar />
         <NavigationBar />
+        {console.log(this.props.post)}
         <p>** Post Details **</p>
         <p>Category: {this.props.match.params.category}</p>
-        <Posts posts={this.props.post} deleteBtn={true} />
+        <ListPosts posts={this.props.post} deleteBtn={true} />
         <p>** Add a comment **</p>
         <NewCommentForm
           handleChange={this.handleChange}
@@ -84,8 +91,7 @@ class PostDetail extends React.Component {
 
 const mapStateToProps = state => ({
   post: Object.keys(state.posts).map(key => state.posts[key]),
-  comments: Object.keys(state.comments).map(key => state.comments[key]),
-  loading: Object.keys(state.posts).length === 0
+  comments: Object.keys(state.comments).map(key => state.comments[key])
 });
 
 const mapDispatchToProps = dispatch => ({

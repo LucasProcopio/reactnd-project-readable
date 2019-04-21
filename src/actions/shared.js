@@ -5,7 +5,8 @@ import {
   incrementVoteScore,
   addNewPost,
   editPost,
-  getPost
+  getPost,
+  delPost
 } from "./posts";
 
 import {
@@ -14,7 +15,8 @@ import {
   vote,
   addPost,
   fetchPost,
-  editPostApi
+  editPostApi,
+  deletePost
 } from "../utils/post_api";
 
 import {
@@ -164,6 +166,14 @@ export function handleDeleteComment(commentId) {
   return dispatch => {
     return deleteComment(commentId).then(comment => {
       dispatch(deletePostComment(comment.id));
+    });
+  };
+}
+
+export function handleDeletePost(postId) {
+  return dispatch => {
+    return deletePost(postId).then(post => {
+      dispatch(delPost(post));
     });
   };
 }

@@ -2,8 +2,12 @@ import React from "react";
 import { connect } from "react-redux";
 import { formatDate } from "../utils/helpers";
 import { postCard } from "../styles/post";
-import { upVotePostScore, downVotePostScore } from "../actions/shared";
-import { Link } from "react-router-dom";
+import {
+  upVotePostScore,
+  downVotePostScore,
+  handleDeletePost
+} from "../actions/shared";
+import { Link, Redirect } from "react-router-dom";
 
 // material design
 import Card from "@material-ui/core/Card";
@@ -18,17 +22,39 @@ import Comment from "@material-ui/icons/Comment";
 import Button from "@material-ui/core/Button";
 
 class Posts extends React.Component {
-  upVote = id => {
-    this.props.dispatch(upVotePostScore(id));
+  state = {
+    redirect: false
   };
 
-  downVote = id => {
-    this.props.dispatch(downVotePostScore(id));
+  upVote = postId => {
+    this.props.dispatch(upVotePostScore(postId));
+  };
+
+  downVote = postId => {
+    this.props.dispatch(downVotePostScore(postId));
+  };
+
+  deletePost = postId => {
+    this.props.dispatch(handleDeletePost(postId));
+    this.setRedirect();
+  };
+
+  setRedirect = () => {
+    this.setState({
+      redirect: true
+    });
+  };
+
+  renderRedirect = () => {
+    if (this.state.redirect === true) {
+      return <Redirect to="/" />;
+    }
   };
 
   render() {
     return (
       <div className="postsContainer">
+        {this.renderRedirect()}
         {this.props.posts.map(post => (
           <Card style={postCard} key={post.id}>
             <CardHeader
@@ -66,10 +92,15 @@ class Posts extends React.Component {
                 </Button>
               </Link>
               {this.props.deleteBtn === true ? (
-                <Button variant="outlined">Delete</Button>
+                <Button
+                  onClick={() => this.deletePost(post.id)}
+                  variant="outlined"
+                >
+                  Delete
+                </Button>
               ) : (
                 <Link to={`${post.category}/${post.id}`}>
-                  <Button variant="outlined">more</Button>
+                  <Button variant="outlined">More</Button>
                 </Link>
               )}
             </CardActions>

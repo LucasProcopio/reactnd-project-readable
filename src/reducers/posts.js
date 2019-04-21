@@ -5,7 +5,8 @@ import {
   DECREMENT_VOTE_SCORE,
   ADD_NEW_POST,
   GET_POST,
-  EDIT_POST
+  EDIT_POST,
+  DELETE_POST
 } from "../actions/posts";
 
 /**
@@ -48,8 +49,11 @@ export default function posts(state = {}, action) {
         ...state
       };
     case GET_POST:
+      if (action.post.deleted === true) {
+        state = Object.assign({}, [action.post]);
+      }
       return {
-        ...Object.assign({}, [action.post])
+        ...state
       };
     case EDIT_POST:
       Object.keys(state).map(key =>
@@ -57,6 +61,12 @@ export default function posts(state = {}, action) {
       );
       return {
         ...state
+      };
+    case DELETE_POST:
+      let posts = Object.keys(state).map(key => state[key]);
+      posts = posts.filter(post => post.id !== action.post.id);
+      return {
+        ...posts
       };
     default:
       return state;
