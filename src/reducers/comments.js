@@ -3,7 +3,8 @@ import {
   INCREMENT_COMMENT_SCORE,
   DECREMENT_COMMENT_SCORE,
   EDIT_COMMENT_BODY,
-  ADD_NEW_COMMENT
+  ADD_NEW_COMMENT,
+  DELETE_COMMENT
 } from "../actions/comments";
 
 export default function comments(state = {}, action) {
@@ -45,6 +46,12 @@ export default function comments(state = {}, action) {
       );
       return {
         ...state
+      };
+    case DELETE_COMMENT:
+      let comments = Object.keys(state).map(key => state[key]);
+      comments = comments.filter(comment => comment.id !== action.commentId);
+      return {
+        ...comments
       };
     default:
       return state;

@@ -39,7 +39,7 @@ export const voteComment = (id, vote) =>
     body: JSON.stringify({ option: vote })
   }).then(data => data.json());
 
-// Delete post
+// Delete a Comment
 export const deleteComment = id =>
   fetch(`http://localhost:3001/comments/${id}`, {
     method: "DELETE",

@@ -5,8 +5,12 @@ import {
   DECREMENT_VOTE_SCORE,
   ADD_NEW_POST,
   GET_POST,
-  EDIT_POST
+  EDIT_POST,
+  DELETE_POST,
+  SORT_BY_DATE,
+  SORT_BY_SCORE
 } from "../actions/posts";
+import _ from "lodash";
 
 /**
  *  posts reducer
@@ -48,8 +52,13 @@ export default function posts(state = {}, action) {
         ...state
       };
     case GET_POST:
+      if (typeof action.post.id === "undefined") {
+        state = {};
+      } else {
+        state = Object.assign({}, [action.post]);
+      }
       return {
-        ...Object.assign({}, [action.post])
+        ...state
       };
     case EDIT_POST:
       Object.keys(state).map(key =>
@@ -57,6 +66,30 @@ export default function posts(state = {}, action) {
       );
       return {
         ...state
+      };
+    case DELETE_POST:
+      let posts = Object.keys(state).map(key => state[key]);
+      posts = posts.filter(post => post.id !== action.post.id);
+      return {
+        ...posts
+      };
+    case SORT_BY_DATE:
+      const postsByDate = _.sortBy(action.posts, [
+        function(post) {
+          return post.timestamp;
+        }
+      ]).reverse();
+      return {
+        ...postsByDate
+      };
+    case SORT_BY_SCORE:
+      const postsByScore = _.sortBy(action.posts, [
+        function(post) {
+          return post.voteScore;
+        }
+      ]).reverse();
+      return {
+        ...postsByScore
       };
     default:
       return state;
