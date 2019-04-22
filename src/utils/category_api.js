@@ -1,5 +1,5 @@
 export const fetchCategories = () =>
-  fetch("http://localhost:3001/categories", {
+  fetch("https://lu-readable-backend.herokuapp.com/", {
     headers: { Authorization: "whatever-you-want" }
   })
     .then(data => data.json())

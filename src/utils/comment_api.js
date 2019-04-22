@@ -1,6 +1,6 @@
 // get comments for a single post
 export const getComments = id =>
-  fetch(`http://localhost:3001/posts/${id}/comments`, {
+  fetch(`https://lu-readable-backend.herokuapp.com/posts/${id}/comments`, {
     headers: { Authorization: "whatever-you-want" }
   })
     .then(data => data.json())
@@ -8,7 +8,7 @@ export const getComments = id =>
 
 // edit comment
 export const editComment = (data, id) =>
-  fetch(`http://localhost:3001/comments/${id}`, {
+  fetch(`https://lu-readable-backend.herokuapp.com/comments/${id}`, {
     method: "PUT",
     headers: {
       Authorization: "whatever-you-want",
@@ -19,7 +19,7 @@ export const editComment = (data, id) =>
 
 // Add new post
 export const addComment = data =>
-  fetch(`http://localhost:3001/comments`, {
+  fetch(`https://lu-readable-backend.herokuapp.com/comments`, {
     method: "POST",
     headers: {
       Authorization: "whatever-you-want",
@@ -30,7 +30,7 @@ export const addComment = data =>
 
 // Change voteScore for a comment
 export const voteComment = (id, vote) =>
-  fetch(`http://localhost:3001/comments/${id}`, {
+  fetch(`https://lu-readable-backend.herokuapp.com/comments/${id}`, {
     method: "POST",
     headers: {
       Authorization: "whatever-you-want",
@@ -41,7 +41,7 @@ export const voteComment = (id, vote) =>
 
 // Delete a Comment
 export const deleteComment = id =>
-  fetch(`http://localhost:3001/comments/${id}`, {
+  fetch(`https://lu-readable-backend.herokuapp.com/comments/${id}`, {
     method: "DELETE",
     headers: {
       Authorization: "whatever-you-want"
