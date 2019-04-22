@@ -1,44 +1,54 @@
 import React from "react";
+import "../styles/commentForm.scss";
+import { FaRocket, FaPlusCircle, FaRegEdit } from "react-icons/fa";
 
 export function CommentForm(props) {
   return (
-    <form className="comment-form" onSubmit={props.handleSubmit}>
-      <label>
-        Body:
+    <div className="comment-form-wrapper">
+      <form className="comment-form" onSubmit={props.handleSubmit}>
+        <div className="add-comment-header">
+          <FaRegEdit /> Edit comment
+        </div>
         <textarea
           name="body"
           value={props.comment.body}
           placeholder="Body of the comment"
           onChange={props.handleChange}
         />
-      </label>
-      <input type="submit" value="Submit" />
-    </form>
+        <div className="form-submit">
+          <FaRocket />
+          <input className="form-submit-btn" type="submit" value="Submit" />
+        </div>
+      </form>
+    </div>
   );
 }
 
 export function NewCommentForm(props) {
   return (
-    <form className="new-comment-form" onSubmit={props.handleSubmit}>
-      <label>
-        author
+    <div className="comment-form-wrapper">
+      <form className="comment-form" onSubmit={props.handleSubmit}>
+        <div className="add-comment-header">
+          <FaPlusCircle /> Add a comment
+        </div>
         <input
           type="text"
           name="author"
           value={props.comment.author}
-          placeholder="name of the author"
+          placeholder="author"
           onChange={props.handleChange}
         />
-      </label>
-      <label>
         <textarea
           name="body"
           value={props.comment.body}
-          placeholder="Body of the comment"
+          placeholder="comment"
           onChange={props.handleChange}
         />
-        <input type="submit" value="Submit" />
-      </label>
-    </form>
+        <div className="form-submit">
+          <FaRocket />
+          <input className="form-submit-btn" type="submit" value="Submit" />
+        </div>
+      </form>
+    </div>
   );
 }

@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import { handleCategoryData, createNewPost } from "../actions/shared";
 import PostForm from "./PostForm";
 import NavigationBar from "./NavigationBar";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.min.css";
 
 class NewPost extends React.Component {
   constructor(props) {
@@ -26,6 +28,17 @@ class NewPost extends React.Component {
     this.setState({ [event.target.name]: event.target.value });
   }
 
+  notifyNewPost = () => {
+    toast("Post successfully created !", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true
+    });
+  };
+
   handleSubmit(event) {
     event.preventDefault();
     // todo: post validation.
@@ -42,13 +55,14 @@ class NewPost extends React.Component {
     };
 
     this.props.dispatch(createNewPost(post));
+    this.notifyNewPost();
   }
 
   render() {
-    console.log("lucas");
     return (
       <div>
         <NavigationBar />
+        <ToastContainer />
         <PostForm
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}

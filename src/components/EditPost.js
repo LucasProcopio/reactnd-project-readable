@@ -3,6 +3,8 @@ import NavigationBar from "./NavigationBar";
 import { handleEditPost } from "../actions/shared";
 import { connect } from "react-redux";
 import PostForm from "./PostForm";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.min.css";
 
 class EditPost extends React.Component {
   constructor(props) {
@@ -33,16 +35,28 @@ class EditPost extends React.Component {
     this.setState({ [event.target.name]: event.target.value });
   }
 
+  notifyEditPost = () => {
+    toast("Post successfully edited !", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true
+    });
+  };
+
   handleSubmit(event) {
     event.preventDefault();
     this.props.dispatch(handleEditPost(this.state));
+    this.notifyEditPost();
   }
 
   render() {
     return (
       <div>
         <NavigationBar />
-        <p>**Edit post**</p>
+        <ToastContainer />
         <PostForm
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}

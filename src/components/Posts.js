@@ -1,26 +1,23 @@
 import React from "react";
 import { connect } from "react-redux";
 import { formatDate } from "../utils/helpers";
-import { postCard } from "../styles/post";
 import {
   upVotePostScore,
   downVotePostScore,
   handleDeletePost
 } from "../actions/shared";
 import { Link, Redirect } from "react-router-dom";
-
-// material design
-import Card from "@material-ui/core/Card";
-import CardHeader from "@material-ui/core/CardHeader";
-import CardContent from "@material-ui/core/CardContent";
-import CardActions from "@material-ui/core/CardActions";
-import Typography from "@material-ui/core/Typography";
-import IconButton from "@material-ui/core/IconButton";
-import ThumbUp from "@material-ui/icons/ThumbUp";
-import ThumbDown from "@material-ui/icons/ThumbDown";
-import Comment from "@material-ui/icons/Comment";
-import Button from "@material-ui/core/Button";
 import { confirmAlert } from "react-confirm-alert";
+import {
+  FaRegThumbsDown,
+  FaRegThumbsUp,
+  FaRegComments,
+  FaRegEdit,
+  FaRegArrowAltCircleRight,
+  FaRegTrashAlt
+} from "react-icons/fa";
+
+import "../styles/posts.scss";
 
 class Posts extends React.Component {
   state = {
@@ -72,58 +69,52 @@ class Posts extends React.Component {
 
   render() {
     return (
-      <div className="postsContainer">
+      <div className="post-container">
         {this.renderRedirect()}
         {this.props.posts.map(post => (
-          <Card style={postCard} key={post.id}>
-            <CardHeader
-              title={post.title}
-              subheader={formatDate(post.timestamp)}
-            />
-            <CardContent>
-              <div className="postInfo">
-                <span className="postAuthor">{post.author}</span>
-                <span className="postCategory">--{post.category}--</span>
+          <div className="post-wrapper" key={post.id}>
+            <div className="post-header">
+              <span className="post-category">{post.category}</span>
+              <span className="post-author">Posted by: {post.author}</span>
+              <span className="post-date">{formatDate(post.timestamp)}</span>
+            </div>
+            <div className="post-body-wrapper">
+              <div className="post-body">
+                <span className="post-title">{post.title}</span>
+                <div className="post-body-content">{post.body}</div>
               </div>
-              <Typography component="p">{post.body}</Typography>
-            </CardContent>
-            <CardActions className="postCardAction" disableActionSpacing>
-              <IconButton
-                aria-label="Add to favorites"
-                onClick={() => this.upVote(post.id)}
-              >
-                <ThumbUp />
-              </IconButton>{" "}
-              {post.voteScore}
-              <IconButton
-                aria-label="Share"
-                onClick={() => this.downVote(post.id)}
-              >
-                <ThumbDown />
-              </IconButton>
-              <IconButton aria-label="Comments">
-                <Comment />
-              </IconButton>{" "}
-              {post.commentCount}
-              <Link to={`/post/${post.id}`}>
-                <Button variant="outlined" color="secondary">
-                  Edit
-                </Button>
-              </Link>
-              {this.props.deleteBtn === true ? (
-                <Button
-                  onClick={() => this.handleDeletePost(post.id)}
-                  variant="outlined"
-                >
-                  Delete
-                </Button>
-              ) : (
-                <Link to={`${post.category}/${post.id}`}>
-                  <Button variant="outlined">More</Button>
+            </div>
+            <div className="post-footer-wrapper">
+              <div className="post-score-count">
+                <FaRegThumbsUp
+                  className="vote-score-btn"
+                  onClick={() => this.upVote(post.id)}
+                />
+                <span className="vote-score">{post.voteScore}</span>
+                <FaRegThumbsDown
+                  className="vote-score-btn"
+                  onClick={() => this.downVote(post.id)}
+                />
+                <FaRegComments className="comment-score-icon" />
+                <div className="post-comment-count">{post.commentCount}</div>
+              </div>
+              <div className="post-actions">
+                <Link to={`/post/${post.id}`}>
+                  <FaRegEdit className="edit-post-btn" />
                 </Link>
-              )}
-            </CardActions>
-          </Card>
+                {this.props.deleteBtn === true ? (
+                  <FaRegTrashAlt
+                    onClick={() => this.handleDeletePost(post.id)}
+                    className="delete-post-btn"
+                  />
+                ) : (
+                  <Link to={`${post.category}/${post.id}`}>
+                    <FaRegArrowAltCircleRight className="know-more-btn" />
+                  </Link>
+                )}
+              </div>
+            </div>
+          </div>
         ))}
       </div>
     );

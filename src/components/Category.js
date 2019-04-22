@@ -6,6 +6,7 @@ import LoadingBar from "react-redux-loading-bar";
 import { Link } from "react-router-dom";
 import ListPosts from "./ListPosts";
 import { sortByDate, sortByScore } from "../actions/posts";
+import { FaHotjar, FaRegCalendarAlt, FaPlusCircle } from "react-icons/fa";
 
 class Category extends React.Component {
   componentDidMount() {
@@ -22,20 +23,35 @@ class Category extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="main-category">
         <LoadingBar />
         <NavigationBar />
-        <div>Category > {this.props.match.params.category}</div>
-        <div>
-          <Link className="new-post-btn" to="/new/post">
-            Add new post
-          </Link>
+        <div className="sort">
+          <div className="sort-wrapper">
+            <span className="sort-title">SORT:</span>
+            <div
+              className="date-sort"
+              onClick={() => this.sortDate(this.props.posts)}
+            >
+              <FaRegCalendarAlt /> DATE
+            </div>
+            <div
+              className="hot-sort"
+              onClick={() => this.sortHot(this.props.posts)}
+            >
+              <FaHotjar /> HOT
+            </div>
+          </div>
         </div>
-        <div className="sort-posts">
-          <button onClick={() => this.sortDate(this.props.posts)}>
-            SORT BY DATE
-          </button>
-          <button onClick={() => this.sortHot(this.props.posts)}>HOT</button>
+        <div className="top">
+          <div className="category-name">
+            {this.props.match.params.category}
+          </div>
+          <div>
+            <Link className="new-post-btn" to="/new/post">
+              <FaPlusCircle /> New Post
+            </Link>
+          </div>
         </div>
         <ListPosts
           posts={this.props.posts.filter(post => {

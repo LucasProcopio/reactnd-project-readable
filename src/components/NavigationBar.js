@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { handleCategoryData } from "../actions/shared";
 import { Link } from "react-router-dom";
+import "../styles/navigation.scss";
 
 class NavigationBar extends React.Component {
   componentDidMount() {
@@ -10,15 +11,18 @@ class NavigationBar extends React.Component {
 
   render() {
     return (
-      <div className="categoryMain">
-        <ul>
+      <div className="category-navigation">
+        <ul className="list-wrapper">
           <li key="all">
-            <Link to="/">All</Link>
+            <Link className="category-link" to="/">
+              Home
+            </Link>
           </li>
           {this.props.categories.map(category => (
             <li key={category.path}>
-              {" "}
-              <Link to={`/${category.path}`}>{category.name}</Link>
+              <Link className="category-link" to={`/${category.path}`}>
+                {category.name}
+              </Link>
             </li>
           ))}
         </ul>

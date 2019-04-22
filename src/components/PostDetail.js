@@ -4,6 +4,8 @@ import LoadingBar from "react-redux-loading-bar";
 import NavigationBar from "./NavigationBar";
 import Comments from "./Comments";
 import NotFound from "./NotFound";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.min.css";
 
 import {
   getPostComments,
@@ -39,6 +41,17 @@ class PostDetail extends React.Component {
     this.setState({ [event.target.name]: event.target.value });
   }
 
+  notify = () => {
+    toast("Comment successfully posted!", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true
+    });
+  };
+
   handleSubmit(event) {
     event.preventDefault();
     const comment = {
@@ -53,6 +66,7 @@ class PostDetail extends React.Component {
 
     this.props.newComment(comment);
     this.props.getPost(comment.parentId);
+    this.notify();
   }
 
   render() {
@@ -69,10 +83,8 @@ class PostDetail extends React.Component {
       <div>
         <LoadingBar />
         <NavigationBar />
-        <p>** Post Details **</p>
-        <p>Category: {this.props.match.params.category}</p>
+        <ToastContainer />
         <ListPosts posts={this.props.post} deleteBtn={true} />
-        <p>** Add a comment **</p>
         <NewCommentForm
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
