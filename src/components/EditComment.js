@@ -3,6 +3,8 @@ import NavigationBar from "./NavigationBar";
 import { connect } from "react-redux";
 import { CommentForm } from "./CommentForm";
 import { handleEditComment } from "../actions/shared";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.min.css";
 
 class EditComment extends React.Component {
   constructor(props) {
@@ -29,6 +31,17 @@ class EditComment extends React.Component {
     this.setState({ ...comment[0] });
   }
 
+  notifyEditComment = () => {
+    toast("Comment successfully edited! :)", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true
+    });
+  };
+
   handleChange(event) {
     this.setState({ [event.target.name]: event.target.value });
   }
@@ -36,12 +49,14 @@ class EditComment extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     this.props.dispatch(handleEditComment(this.state));
+    this.notifyEditComment();
   }
 
   render() {
     return (
       <div>
         <NavigationBar />
+        <ToastContainer />
         <CommentForm
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}

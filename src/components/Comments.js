@@ -16,6 +16,8 @@ import {
   FaRegTrashAlt
 } from "react-icons/fa";
 import "../styles/comments.scss";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 class Comments extends React.Component {
   upVote = id => {
@@ -43,14 +45,27 @@ class Comments extends React.Component {
     });
   };
 
+  notifyDeleteComment = () => {
+    toast("Comment successfully deleted!", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true
+    });
+  };
+
   handleDelete = comment => {
     this.props.deleteComment(comment.id);
     this.props.getPost(comment.parentId);
+    this.notifyDeleteComment();
   };
 
   render() {
     return (
       <div className="comment-container">
+        <ToastContainer />
         {this.props.comments.map(comment => (
           <div className="comment-wrapper" key={comment.id}>
             <div className="comment-body-wrapper">

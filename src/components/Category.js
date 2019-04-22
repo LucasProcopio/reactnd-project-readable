@@ -23,7 +23,7 @@ class Category extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="main-category">
         <LoadingBar />
         <NavigationBar />
         <div className="sort">
