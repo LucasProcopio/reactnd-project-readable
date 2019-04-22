@@ -7,6 +7,9 @@ on their posts and other users' posts and vote on posts and comments.
 
 ## ![Alt](public/logo/logo.png "READABLE")
 
+## Live 
+- click [here](https://lu-readable-frontend.herokuapp.com/) to preview :)
+
 ## Instalation
 
 - Download or Clone the repository
