@@ -1,16 +1,15 @@
-/**
- * Ation types
- */
-export const RECEIVE_POSTS = "RECEIVE_POSTS";
-export const GET_POSTS_BY_CATEGORY = "GET_POSTS_BY_CATEGORY";
-export const INCREMENT_VOTE_SCORE = "INCREMENT_VOTE_SCORE";
-export const DECREMENT_VOTE_SCORE = "DECREMENT_VOTE_SCORE";
-export const ADD_NEW_POST = "ADD_NEW_POST";
-export const GET_POST = "GET_POST";
-export const EDIT_POST = "EDIT_POST";
-export const DELETE_POST = "DELETE_POST";
-export const SORT_BY_DATE = "SORT_BY_DATE";
-export const SORT_BY_SCORE = "SORT_BY_SCORE";
+import {
+  RECEIVE_POSTS,
+  GET_POSTS_BY_CATEGORY,
+  INCREMENT_VOTE_SCORE,
+  DECREMENT_VOTE_SCORE,
+  ADD_NEW_POST,
+  GET_POST,
+  EDIT_POST,
+  DELETE_POST,
+  SORT_BY_DATE,
+  SORT_BY_SCORE
+} from "./actionTypes";
 
 /**
  * Action creators

@@ -1,0 +1,42 @@
+@media only screen and (max-width: 768px) {
+  .not-found {
+    font-size: 26px;
+  }
+
+  .form-wrapper .form-post {
+    width: 95%;
+    select,
+    input,
+    textarea {
+      width: 95%;
+    }
+  }
+  .post-container {
+    width: 100%;
+    .post-wrapper {
+      .post-header {
+        .post-category,
+        .post-author,
+        .post-date {
+          font-size: 10px;
+        }
+      }
+      .post-body-wrapper {
+        .post-body {
+          .post-title,
+          .post-body-content {
+            font-size: 12px;
+          }
+        }
+      }
+    }
+  }
+
+  .comment-form-wrapper .comment-form {
+    width: 100%;
+  }
+
+  .comment-container {
+    width: 100%;
+  }
+}

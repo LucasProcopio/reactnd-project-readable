@@ -55,7 +55,7 @@ class Home extends React.Component {
             </div>
           </div>
         </div>
-        <ListPosts posts={this.props.posts} />
+        <ListPosts posts={this.props.posts} showMore={true} />
       </div>
     );
   }

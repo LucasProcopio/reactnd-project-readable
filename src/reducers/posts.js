@@ -9,7 +9,7 @@ import {
   DELETE_POST,
   SORT_BY_DATE,
   SORT_BY_SCORE
-} from "../actions/posts";
+} from "../actions/actionTypes";
 import _ from "lodash";
 
 /**
