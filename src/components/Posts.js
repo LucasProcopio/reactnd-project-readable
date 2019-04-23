@@ -102,12 +102,11 @@ class Posts extends React.Component {
                 <Link to={`/post/${post.id}`}>
                   <FaRegEdit className="edit-post-btn" />
                 </Link>
-                {this.props.deleteBtn === true ? (
-                  <FaRegTrashAlt
-                    onClick={() => this.handleDeletePost(post.id)}
-                    className="delete-post-btn"
-                  />
-                ) : (
+                <FaRegTrashAlt
+                  onClick={() => this.handleDeletePost(post.id)}
+                  className="delete-post-btn"
+                />
+                {this.props.showMore === true && (
                   <Link to={`${post.category}/${post.id}`}>
                     <FaRegArrowAltCircleRight className="know-more-btn" />
                   </Link>

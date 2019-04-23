@@ -5,7 +5,7 @@ import {
   EDIT_COMMENT_BODY,
   ADD_NEW_COMMENT,
   DELETE_COMMENT
-} from "../actions/comments";
+} from "../actions/actionTypes";
 
 export default function comments(state = {}, action) {
   switch (action.type) {

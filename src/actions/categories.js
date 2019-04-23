@@ -1,7 +1,4 @@
-/**
- * Actions
- */
-export const RECEIVE_CATEGORIES = "RECEIVE_CATEGORIES";
+import { RECEIVE_CATEGORIES } from "./actionTypes";
 
 /**
  *  Action creators

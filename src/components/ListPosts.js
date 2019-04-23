@@ -6,7 +6,7 @@ class ListPosts extends React.Component {
   renderPosts = () => {
     const posts = this.props.posts;
     if (posts.length > 0) {
-      return <Posts posts={posts} deleteBtn={this.props.deleteBtn} />;
+      return <Posts posts={posts} showMore={this.props.showMore} />;
     } else {
       return <NotFound />;
     }

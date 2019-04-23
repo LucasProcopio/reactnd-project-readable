@@ -72,7 +72,7 @@ class PostDetail extends React.Component {
   render() {
     if (this.props.post.length === 0) {
       return (
-        <div>
+        <div className="not-found-wrapper">
           <NavigationBar />
           <NotFound />
         </div>
@@ -84,7 +84,7 @@ class PostDetail extends React.Component {
         <LoadingBar />
         <NavigationBar />
         <ToastContainer />
-        <ListPosts posts={this.props.post} deleteBtn={true} />
+        <ListPosts posts={this.props.post} />
         <NewCommentForm
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
