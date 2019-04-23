@@ -57,6 +57,7 @@ class Category extends React.Component {
           posts={this.props.posts.filter(post => {
             return post.category === this.props.match.params.category;
           })}
+          showMore={true}
         />
       </div>
     );
